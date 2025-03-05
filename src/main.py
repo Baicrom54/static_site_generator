@@ -42,10 +42,12 @@ def generate_page(from_path, template_path, dest_path,b_path):
     template=template.replace('href="/',f'href>="{b_path}').replace('src="/',f'src="{b_path}')
     with open(f"{dest_path}","w") as dest_file:
         dest_file.write(template)
-
-def generate_pages_recursive(dir_path_content, template_path, dest_dir_path,b_path):
+def wrapper_generate_page_rec(dir_path_content, template_path, dest_dir_path,b_path):
     os.makedirs(dest_dir_path, exist_ok=True)
     cp_tree_static_to_dest(dest_dir_path)
+    generate_pages_recursive(dir_path_content, template_path, dest_dir_path,b_path)
+
+def generate_pages_recursive(dir_path_content, template_path, dest_dir_path,b_path):
     for element in os.listdir(dir_path_content):
         element_path=os.path.join(dir_path_content,element)
         new_dest_dir_path=os.path.join(dest_dir_path,element.replace(".md",".html"))
@@ -64,7 +66,7 @@ def main():
         basepath="/"
     else:
         basepath=sys.argv[1]
-    generate_pages_recursive("./content","./template.html","./docs",basepath)
+    wrapper_generate_page_rec("./content","./template.html","./docs",basepath)
 
 
 if __name__ == "__main__":
