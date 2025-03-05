@@ -54,7 +54,7 @@ class ParentNode(HTMLNODE):
                 if c.props=={}:
                     string_so_far+=f"<{c.tag}>{str(c.value)}</{c.tag}>" if c.tag!="" else f"{str(c.value)}"
                 else:
-                    string_so_far+=f"<{c.tag} href={c.props["href"]}>{str(c.value)}</{c.tag}>"
+                    string_so_far+=f'<{c.tag} href="{c.props["href"]}">{str(c.value)}</{c.tag}>'
 
 
             else:
