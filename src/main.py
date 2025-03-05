@@ -39,7 +39,7 @@ def generate_page(from_path, template_path, dest_path,b_path):
         raise Exception("missing title")
     html_content=node.to_html()
     template=template.replace("{{ Content }}",html_content).replace("{{ Title }}",title)
-    template=template.replace('href="/',f'href>="{b_path}').replace('src="/',f'src="{b_path}')
+    template=template.replace('href="/',f'href="{b_path}').replace('src="/',f'src="{b_path}')
     with open(f"{dest_path}","w") as dest_file:
         dest_file.write(template)
 def wrapper_generate_page_rec(dir_path_content, template_path, dest_dir_path,b_path):
